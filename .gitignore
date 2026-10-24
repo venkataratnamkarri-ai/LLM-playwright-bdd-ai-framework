@@ -1,0 +1,31 @@
+# Environment variables and API keys
+.env
+*.env
+!.env.example
+
+# Test artifacts (generated outputs)
+artifacts/*.json
+artifacts/*.xlsx
+artifacts/*.png
+
+# Pytest & Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Virtual Environments
+env/
+venv/
+.venv/
+ENV/
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS specific
+.DS_Store
+Thumbs.db
