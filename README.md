@@ -16,22 +16,22 @@ This framework moves beyond conventional test automation by introducing autonomo
 
 ```mermaid
 flowchart TD
-    Gherkin["BDD Gherkin Feature<br/>(flight_purchase.feature)"] --> Steps["Behave Step Definitions<br/>(flight_purchase_steps.py)"]
+    Gherkin["BDD Gherkin Feature (flight_purchase.feature)"] --> Steps["Behave Step Definitions (flight_purchase_steps.py)"]
 
-    subgraph Autonomous AI Modules
-        Steps --> GenData["CustomerDataGenerator<br/>(Cohere Generates Synthetic Customer JSON)"]
-        POM --> Healer["LocatorHealer<br/>(Analyzes DOM & Heals Broken Selectors)"]
-        Verify --> AssertEngine["AssertionEngine<br/>(Semantic Verification of Outcome)"]
-        Failure --> ErrAnalyzer["ErrorAnalyzer<br/>(Diagnoses Root Cause & Fixes)"]
+    subgraph AI_Modules ["Autonomous AI Modules"]
+        Steps --> GenData["CustomerDataGenerator (Cohere Synthetic Customer JSON)"]
+        POM -.->|"On Locator Failure"| Healer["LocatorHealer (Analyzes DOM & Heals Broken Selectors)"]
+        Verify --> AssertEngine["AssertionEngine (Semantic Verification of Outcome)"]
+        Failure --> ErrAnalyzer["ErrorAnalyzer (Diagnoses Root Cause & Fixes)"]
     end
 
-    subgraph Page Object Model (POM)
-        GenData --> POM["HomePage ➔ ReservePage ➔ PurchasePage"]
+    subgraph POM_Layer ["Page Object Model (POM)"]
+        GenData --> POM["HomePage -> ReservePage -> PurchasePage"]
         POM --> Browser["Playwright Chromium Browser Session"]
     end
 
-    Browser --> Verify{Business Assertion}
-    Verify -->|Pass| PassReport["Cucumber Report Generator<br/>(Markdown & JSON Artifacts)"]
+    Browser --> Verify{"Business Assertion"}
+    Verify -->|Pass| PassReport["Cucumber Report Generator (Markdown & JSON Artifacts)"]
     Verify -->|Fail| Failure["Exception Handler + Full-Page Screenshot"]
     Failure --> ErrAnalyzer
     ErrAnalyzer --> PassReport
